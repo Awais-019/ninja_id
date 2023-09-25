@@ -4,9 +4,15 @@ void main() {
   runApp(const MaterialApp(home: Home()));
 }
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({super.key});
 
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  int ninjaLevel = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +23,16 @@ class Home extends StatelessWidget {
         backgroundColor: Colors.grey[850],
         elevation: 0.0,
       ),
-      body: const Padding(
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          setState(() {
+            ninjaLevel++;
+          });
+        },
+        backgroundColor: Colors.grey,
+        child: const Icon(Icons.add),
+      ),
+      body: Padding(
         padding: EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,7 +74,7 @@ class Home extends StatelessWidget {
             ),
             SizedBox(height: 10.0),
             Text(
-              "8",
+              '$ninjaLevel',
               style: TextStyle(
                 color: Colors.amberAccent,
                 letterSpacing: 2.0,
